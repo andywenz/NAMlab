@@ -1,16 +1,16 @@
 # 接口数据
 
-interfaces_msg = [{name: "ge0/0", "description": "manager", "status": "up"},
-                  {name: "ge0/1", "description": "core01", "status": "up"},
-                  {name: "ge0/2", "description": "core02", "status": "up"},
-                  {name: "ge0/3", "description": "branch01", "status": "up"},
-                  {name: "ge0/4", "description": "branch02", "status": "up"}]
+interfaces_msg = [{"name": "ge0/0", "description": "manager", "status": "up"},
+                  {"name": "ge0/1", "description": "core01", "status": "up"},
+                  {"name": "ge0/2", "description": "core02", "status": "up"},
+                  {"name": "ge0/3", "description": "branch01", "status": "up"},
+                  {"name": "ge0/4", "description": "branch02", "status": "up"}]
 # IP数据
-ip_datas = {"interface0": 10.10.10.1,
-            "interface1": 172.16.1.1,
-            "interface2": 172.17.1.1,
-            "interface3": 172.18.1.1,
-            "interface4": 192.168.25.1}
+ip_datas = {"interface0": "10.10.10.1",
+            "interface1": "172.16.1.1",
+            "interface2": "172.17.1.1",
+            "interface3": "172.18.1.1",
+            "interface4": "192.168.25.1"}
 # -------------------作业区域结束------------------------
 
 # 命令行输出数据
