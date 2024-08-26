@@ -24,33 +24,41 @@ vul_ports = {'21': 'FTP', '22': 'SSH', '23': 'TELNET', '25': 'SMTP', '53': 'DNS'
 
 
 # 攻击者部分 - 请修改为函数
-atk_port_1 = random.randint(20, 450)
-atk_port_2 = random.randint(20, 450)
-while atk_port_1 == atk_port_2:
-    atk_port_2 = random.randint(20, 3390)
-if atk_port_1 < atk_port_2:
-    atk_start = atk_port_1
-    atk_end = atk_port_2
-else:
-    atk_start = atk_port_2
-    atk_end = atk_port_1
-print(f'攻击者从端口{atk_start}到端口{atk_end}尝试了攻击！')
+def attack():
+    atk_port_1 = random.randint(20, 450)
+    atk_port_2 = random.randint(20, 450)
+    while atk_port_1 == atk_port_2:
+        atk_port_2 = random.randint(20, 3390)
+    if atk_port_1 < atk_port_2:
+        atk_start = atk_port_1
+        atk_end = atk_port_2
+    else:
+        atk_start = atk_port_2
+        atk_end = atk_port_1
+    print(f'攻击者从端口{atk_start}到端口{atk_end}尝试了攻击！')
+    return atk_start, atk_end
 
 
 # 防御者部分 - 请修改为函数
-port_list = list(vul_ports.keys()) # 提取高危端口所有的键，即所有的端口，形成一个列表
-protection_ports = random.sample(port_list, 5)
-print('防御者保护了以下端口：' + ', '.join(protection_ports))
-other_ports = [port for port in port_list if port not in protection_ports]
-close_ports = random.sample(other_ports, 5)
-print('防御者关闭了以下端口：' + ', '.join(close_ports))
-other_vul_ports = [port for port in port_list if port not in protection_ports + close_ports]
-
+def defend():
+    port_list = list(vul_ports.keys()) # 提取高危端口所有的键，即所有的端口，形成一个列表
+    protection_ports = random.sample(port_list, 5)
+    print('防御者保护了以下端口：' + ', '.join(protection_ports))
+    other_ports = [port for port in port_list if port not in protection_ports]
+    close_ports = random.sample(other_ports, 5)
+    print('防御者关闭了以下端口：' + ', '.join(close_ports))
+    other_vul_ports = [port for port in port_list if port not in protection_ports + close_ports]
+    return other_vul_ports
 
 # 最终判定部分 - 请修改为函数
-score = total = 100
-for port in other_vul_ports:
-    if int(port) in range(atk_start, atk_end):
-        print(f"攻击者通过{vul_ports[port]}({port})攻击成功")
-        score -= total/len(other_vul_ports)
-print(f"防守方最终得分：{score}")
+def run(atk_start, atk_end, other_vul_ports):
+    score = total = 100
+    for port in other_vul_ports:
+        if int(port) in range(atk_start, atk_end):
+            print(f"攻击者通过{vul_ports[port]}({port})攻击成功")
+            score -= total/len(other_vul_ports)
+    print(f"防守方最终得分：{score}")
+
+atk_start, atk_end = attack()
+other_vul_ports = defend()
+run(atk_start, atk_end, other_vul_ports)

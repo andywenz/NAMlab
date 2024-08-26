@@ -48,8 +48,14 @@ port_list = list(vul_ports.keys()) # 提取高危端口所有的键，即所有�
 protection_ports = random.sample(port_list, 5)
 print('防御者保护了以下端口：' + ', '.join(protection_ports))
 
+## 未防护的端口
+no_protect_ports = [port for port in port_list if port not in protection_ports]
+shutdown_ports = random.sample(no_protect_ports, 5)
+print('防御者关闭了以下端口：' + ', '.join(shutdown_ports))
+
 ## 剩余未防御的端口
-other_vul_ports = [port for port in port_list if port not in protection_ports]
+other_vul_ports = [port for port in no_protect_ports if port not in shutdown_ports]
+print('以下端口未做防护且未关闭：' + ', '.join(other_vul_ports))
 
 
 # 最终判定部分
